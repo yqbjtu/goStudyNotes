@@ -30,3 +30,7 @@ func main() {
 	res1 := res.WriteOne("123")
 	fmt.Println(res1)
 }
+
+//运行结果
+// 3
+// 123
