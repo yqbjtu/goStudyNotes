@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+// 按照索引删除
+func remove[T comparable](slice []T, s int) []T {
+	return append(slice[:s], slice[s+1:]...)
+}
+
 func main() {
 
 	// 定义一个切片, 数组声明需要指定元素类型及元素个数. 而切片不用
@@ -29,7 +34,11 @@ func main() {
 
 	slice1 = append(slice1, "d")
 	slice1 = append(slice1, "e", "f", "g", "a")
-	fmt.Printf("slice1 append more item, len=%d, cap=%d, slice2=%v\n", len(slice1), cap(slice1), slice1)
+	fmt.Printf("slice1 append more item, len=%d, cap=%d, slice1=%v\n", len(slice1), cap(slice1), slice1)
+
+	// 没有原生的remove方法
+	slice1 = remove(slice1, 5)
+	fmt.Printf("slice1 remove the 5th item, len=%d, cap=%d, slice1=%v\n", len(slice1), cap(slice1), slice1)
 
 	c := make([]string, len(slice1))
 	copy(c, slice1)
@@ -62,18 +71,19 @@ func main() {
 }
 
 //运行结果
-////未make, len=0, cap=0, (slice1 == nil):true, slice1=[]
-////make后，len=3, cap=3, (slice1 == nil):false, slice1=[  ]
-////len=3, cap=5, intSlice1=[0 0 0]
-////len=3, cap=5, slice2=[  ]
-////set: [a b c]
-////get[2]: c
-////slice1 len: 3
-////slice1 append more item, len=8, cap=12, slice2=[a b c d e f g a]
-////copy slice1 to c: [a b c d e f g a]
-////截取 slice1[2:5]内容 sl1: [c d e]
-////截取 slice1[:5]内容 sl2: [a b c d e]
-////截取 slice1[2:]内容 sl3: [c d e f g a]
-////initSlice3, len=3, cap=3, initSlice3=[g h i]
-////initSlice3 append one item, len=4, cap=6, slice2=[g h i d]
-////twoDimensionSlice, len=3, cap=3, slice2=[[0] [1 2] [2 3 4]]
+//未make, len=0, cap=0, (slice1 == nil):true, slice1=[]
+//make后，len=3, cap=3, (slice1 == nil):false, slice1=[  ]
+//len=3, cap=5, intSlice1=[0 0 0]
+//len=3, cap=5, slice2=[  ]
+//set: [a b c]
+//get[2]: c
+//slice1 len: 3
+//slice1 append more item, len=8, cap=12, slice1=[a b c d e f g a]
+//slice1 remove the 5th item, len=7, cap=12, slice1=[a b c d e g a]
+//copy slice1 to c: [a b c d e g a]
+//截取 slice1[2:5]内容 sl1: [c d e]
+//截取 slice1[:5]内容 sl2: [a b c d e]
+//截取 slice1[2:]内容 sl3: [c d e g a]
+//initSlice3, len=3, cap=3, initSlice3=[g h i]
+//initSlice3 append one item, len=4, cap=6, slice2=[g h i d]
+//twoDimensionSlice, len=3, cap=3, slice2=[[0] [1 2] [2 3 4]]
