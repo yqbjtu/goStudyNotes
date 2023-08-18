@@ -11,6 +11,7 @@ var (
 	slice2 = slice[2:]
 )
 
+// 1.18 版本 slice的扩容，通常为2x，当容量较大时，会调整为1.25x
 func main() {
 	fmt.Printf("初始容量\n")
 	printSlice()
