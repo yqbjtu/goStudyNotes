@@ -40,9 +40,41 @@ func main() {
 	} else {
 		fmt.Printf("md5 for file %v is %v\n", fileName, md5Val)
 	}
+
+	fmt.Println("字符串的md5值demo")
+	str := "你要加密的字符串abc"
+	md5Handle := md5.New()
+	_, err = io.WriteString(md5Handle, str)
+	if err != nil {
+		fmt.Printf("fail to calc md5 for string %v is errMsg:%v\n", str, err)
+		return
+	}
+	md5ValByte := md5Handle.Sum(nil)
+	// 输出16进制格式的MD5字符串
+	fmt.Printf("%x\n", md5ValByte)
+	md5str := hex.EncodeToString(md5ValByte)
+	fmt.Printf("md5 for string %v is %v\n", str, md5str)
+
+	fmt.Println("byte 数组的md5值demo")
+	dataByte := []byte("你要加密的数据")     // 将字符串转换为byte数组
+	md5Val16Byte := md5.Sum(dataByte) // 对data进行MD5哈希计算
+
+	// 输出16进制格式的MD5字符串
+	fmt.Printf("%x\n", md5Val16Byte)
+	sliceFrom16ByteArray := md5Val16Byte[:]
+	md5str = hex.EncodeToString(sliceFrom16ByteArray)
+	fmt.Printf("md5 for byte[] %v is %v\n", dataByte, md5str)
 }
 
 //运行结果
-//Current dir:  /Users/ericyang/GolandProjects/mygotutorials2/typecast
-//md5Byte:[143 226 153 178 250 103 61 141 29 89 151 253 122 103 122 29], md5str:8fe299b2fa673d8d1d5997fd7a677a1d
-//md5 for file file1.txt is 8fe299b2fa673d8d1d5997fd7a677a1d
+/*
+Current dir:  /Users/ericyang/GolandProjects/mygotutorials2/typecast
+md5Byte:[143 226 153 178 250 103 61 141 29 89 151 253 122 103 122 29], md5str:8fe299b2fa673d8d1d5997fd7a677a1d
+md5 for file file1.txt is 8fe299b2fa673d8d1d5997fd7a677a1d
+字符串的md5值demo
+3eddfbd257743e9aa83fc2d30ef8440f
+md5 for string 你要加密的字符串abc is 3eddfbd257743e9aa83fc2d30ef8440f
+byte 数组的md5值demo
+5d086491770a83748a1cd1f84bd09ad5
+md5 for byte[] [228 189 160 232 166 129 229 138 160 229 175 134 231 154 132 230 149 176 230 141 174] is 5d086491770a83748a1cd1f84bd09ad5
+*/
