@@ -53,6 +53,7 @@ func (l *LRUCache) Put(key int, value int) {
 }
 
 // leetcode 146. LRU 缓存, 借助"container/list" 实现，container提供了三种不同的容器，分别是heap（堆），链表（list），环(ring)
+// list.List: List represents a doubly linked list 文档 https://pkg.go.dev/container/list
 func main() {
 	// Test case 1
 	// ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
