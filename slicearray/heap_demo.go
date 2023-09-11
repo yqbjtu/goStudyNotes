@@ -36,6 +36,7 @@ func (h *Holidays) Push(x interface{}) {
 	*h = append(*h, x.(Holiday))
 }
 
+// remove and return element Len() - 1
 func (h *Holidays) Pop() interface{} {
 	old := *h
 	n := len(old)
@@ -45,22 +46,59 @@ func (h *Holidays) Pop() interface{} {
 }
 
 func main() {
-	holidays := &Holidays{}
-	heap.Init(holidays)
-	heap.Push(holidays, Holiday{name: "Christmas", date: time.Date(2023, time.December, 25, 0, 0, 0, 0, time.Local)})
-	heap.Push(holidays, Holiday{name: "Labour Day", date: time.Date(2023, time.May, 1, 0, 0, 0, 0, time.Local)})
-	heap.Push(holidays, Holiday{name: "Diwali", date: time.Date(2023, time.November, 23, 0, 0, 0, 0, time.Local)})
+	holidayHeap1 := myHeap()
+	fmt.Println("holidayHeap1: ", holidayHeap1)
+	fmt.Println("holidayHeap1.Pop(), get the last item from heap")
+	for holidayHeap1.Len() > 0 {
+		fmt.Printf("%v \n", holidayHeap1.Pop())
+	}
+	fmt.Println()
 
-	fmt.Println("holidays: ", holidays)
+	holidayHeap2 := myHeap()
+	fmt.Println("holidayHeap2: ", holidayHeap2)
+	holidayHeap2.Pop()
+	fmt.Println("after pop one, holidayHeap2: ", holidayHeap2)
 
-	holidays.Pop()
-	fmt.Println("after pop one, holidays: ", holidays)
+	holidayHeap2.Pop()
+	fmt.Println("after pop two, holidayHeap2: ", holidayHeap2)
+	fmt.Println()
 
-	holidays.Pop()
-	fmt.Println("after pop two, holidays: ", holidays)
+	holidayHeap3 := myHeap()
+	fmt.Println("holidayHeap3: ", holidayHeap3)
+
+	// func heap.Pop(h Interface) any Pop removes and returns the minimum element (according to Less) from the heap.
+	// The complexity is O(log n) where n = h.Len(). Pop is equivalent to Remove(h, 0).
+
+	fmt.Println("heap.Pop(holidayHeap3), get the the minimum element from heap")
+	for holidayHeap3.Len() > 0 {
+		fmt.Printf("%v \n", heap.Pop(holidayHeap3))
+	}
 }
 
-//运行结果
-//holidays:  &[[Labour Day, May 1] [Christmas, Dec 25] [Diwali, Nov 23]]
-//after pop one, holidays:  &[[Labour Day, May 1] [Christmas, Dec 25]]
-//after pop two, holidays:  &[[Labour Day, May 1]]
+func myHeap() *Holidays {
+	holidayHeap := &Holidays{}
+	heap.Init(holidayHeap)
+	heap.Push(holidayHeap, Holiday{name: "Christmas", date: time.Date(2023, time.December, 25, 0, 0, 0, 0, time.Local)})
+	heap.Push(holidayHeap, Holiday{name: "Labour Day", date: time.Date(2023, time.May, 1, 0, 0, 0, 0, time.Local)})
+	heap.Push(holidayHeap, Holiday{name: "Diwali", date: time.Date(2023, time.November, 23, 0, 0, 0, 0, time.Local)})
+
+	return holidayHeap
+}
+
+/*运行结果
+holidayHeap1:  &[[Labour Day, May 1] [Christmas, Dec 25] [Diwali, Nov 23]]
+holidayHeap1.Pop(), get the last item from heap
+[Diwali, Nov 23]
+[Christmas, Dec 25]
+[Labour Day, May 1]
+
+holidayHeap2:  &[[Labour Day, May 1] [Christmas, Dec 25] [Diwali, Nov 23]]
+after pop one, holidayHeap2:  &[[Labour Day, May 1] [Christmas, Dec 25]]
+after pop two, holidayHeap2:  &[[Labour Day, May 1]]
+
+holidayHeap3:  &[[Labour Day, May 1] [Christmas, Dec 25] [Diwali, Nov 23]]
+heap.Pop(holidayHeap3), get the the minimum element from heap
+[Labour Day, May 1]
+[Diwali, Nov 23]
+[Christmas, Dec 25]
+*/
