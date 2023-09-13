@@ -1,0 +1,22 @@
+type BQueue struct {
+	channel chan int
+}
+
+func NewQueue(capacity int) Queue {
+	return &BQueue{
+		channel: make(chan int, capacity),
+	}
+}
+
+func (q *BQueue) Enqueue(val int) error {
+	select {
+	case q.channel <- val:
+		return nil
+	default:
+		return ErrQueueFull
+	}
+}
+
+func (q *BQueue) Dequeue() (int, error) {
+	return <-q.channel, nil
+}
