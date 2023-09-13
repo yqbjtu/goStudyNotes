@@ -1,3 +1,8 @@
+var (
+	ErrQueueEmpty = errors.New("queue empty")
+   	ErrQueueFull  = errors.New("queue full")
+)
+
 type BQueue struct {
 	channel chan int
 }
@@ -18,5 +23,10 @@ func (q *BQueue) Enqueue(val int) error {
 }
 
 func (q *BQueue) Dequeue() (int, error) {
-	return <-q.channel, nil
+	select {
+	case val := <- q.channel:
+		return val, nil
+	default:
+		return 0, ErrQueueEmpty
+	}
 }
