@@ -133,11 +133,8 @@ func execWithMultiArgs() {
 /*运行结果
 output to std1, cmd can run normally
 total 10
-0 AppleInternal         0 Volumes               0 etc                   0 osmdb-core            0 usr
-0 Applications          0 bin                   0 home                  0 osmdb-output          0 var
 0 Library               0 coredata              0 opt                   0 private
-0 System                0 cores                 0 osmdb-checkin         0 sbin
-0 Users                10 dev                   0 osmdb-checkout        0 tmp
+'''
 
 output to std2, cmd can't run normally for the cmd args is not right
 ls: aaaa-sh: No such file or directory
@@ -147,7 +144,7 @@ output to std3, cmd can't run normally for the cmd dir does not exist
 failed to call cmd.Run() with args:/not-exist,  err:chdir /not-exist: no such file or directory
 
 output to std2
-cmd '[echo ]' executed in dir '' (命 令 执 行 的 默 认 目 录 ), env:[ALACRITTY_WINDOW_ID=0 COLORTERM=truecolor COMMAND_MODE=unix2003 DISABLE_AUTO_UPDATE=true GRADLE_HOME=/Users/ericyang/.sdkman/candidates/gradle/current HOME=/Users/ericyang HOMEBREW_CELLAR=/opt/homebrew/Cellar HOMEBREW_PREFIX=/opt/homebrew HOMEBREW_REPOSITORY=/opt/homebrew INFOPATH=/opt/homebrew/share/info:/opt/homebrew/share/info: INTELLIJ_TERMINAL_COMMAND_BLOCKS=1 JAVA_HOME=/Users/ericyang/.sdkman/candidates/java/current JAVA_MAIN_CLASS_8868=fleet.dock.bootstrap.FleetBootstrapKt LC_ALL=zh_CN.UTF-8 LOGIN_SHELL=1 LOGNAME=ericyang MANPATH=/opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/opt/homebrew/share/man: MAVEN_HOME=/Users/ericyang/software/apache-maven-3.8.6 OLDPWD=/Users/ericyang/GolandProjects/mygotutorials2/stringdemo PATH=/Users/ericyang/software/apache-maven-3.8.6/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Users/ericyang/software/apache-maven-3.8.6/bin:/Users/ericyang/.sdkman/candidates/java/current/bin:/Users/ericyang/.sdkman/candidates/gradle/current/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/ericyang/Library/Application Support/JetBrains/Toolbox/scripts:/Users/ericyang/Library/Application Support/JetBrains/Toolbox/scripts PWD=/Users/ericyang/GolandProjects/mygotutorials2/string SDKMAN_CANDIDATES_API=https://api.sdkman.io/2 SDKMAN_CANDIDATES_DIR=/Users/ericyang/.sdkman/candidates SDKMAN_DIR=/Users/ericyang/.sdkman SDKMAN_PLATFORM=darwinarm64 SDKMAN_VERSION=5.15.0 SHELL=/bin/zsh SHLVL=1 SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.XATn15hl3j/Listeners TERM=xterm-256color TERM_PROGRAM=Jetbrains.Fleet TERM_PROGRAM_VERSION=1.22.113 TMPDIR=/var/folders/ls/8nvj13l13b59rpk8c1jw_tg00000gn/T/ USER=ericyang WINDOWID=0 XPC_FLAGS=0x0 XPC_SERVICE_NAME=0 __CFBundleIdentifier=Fleet.app __CF_USER_TEXT_ENCODING=0x1F5:0x19:0x34 _=/usr/local/go/bin/go MY_ENV_VAR=some_value], out:'
+cmd '[echo ]' executed in dir '' (命 令 执 行 的 默 认 目 录 ), env:[ALACRITTY_WINDOW_ID=0/opt/homebrew/share/info: INTELLIJ_TERMINAL_COMMAND_BLOCKS=1 _=/usr/local/go/bin/go MY_ENV_VAR=some_value], out:'
 '
 read from std
 translated phrase: "AND OLD FALCON"
