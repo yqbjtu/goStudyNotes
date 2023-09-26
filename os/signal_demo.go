@@ -40,7 +40,8 @@ func main() {
 			//如果是ctrl+c， 不中断程序，只有kill -15 program 才退出， kill -9捕获不到直接退出
 			if value == syscall.SIGTERM {
 				fmt.Println("Received expected value:", value)
-				time.Sleep(5 * time.Second)
+				// 等待时间太短，就看不到打印Received expected value: terminated
+				time.Sleep(20 * time.Second)
 				done <- true
 			} else {
 				fmt.Printf("Received unexpected value:%v, continue to read\n", value)
@@ -61,5 +62,6 @@ func main() {
 The PID of the caller process is 25739.
 awaiting signal
 ^CReceived unexpected value:interrupt, continue to read （ctrl+c  的结果）
+Received expected value: terminated ，然后退出 （kill pid结果）
 signal: killed  (kill -9 的结果)
 */
